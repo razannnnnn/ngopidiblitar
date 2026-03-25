@@ -114,7 +114,7 @@ export function CafeList({ cafes }) {
             whileInView={{ opacity: 1, scale: 1, y: 0 }}
             viewport={{ once: true, margin: "-50px" }}
             transition={{ duration: 0.5, ease: "easeOut" }}
-            className="group p-5 md:p-6 rounded-2xl border border-neutral-200/80 dark:border-neutral-800/60 bg-white/70 dark:bg-neutral-900/50 backdrop-blur-md text-card-foreground hover:shadow-[0_8px_30px_rgb(0,0,0,0.06)] dark:hover:shadow-[0_8px_30px_rgb(0,0,0,0.3)] hover:-translate-y-1 transition-all duration-300 cursor-pointer flex flex-col md:flex-row md:items-center justify-between gap-4"
+            className="group p-5 md:p-6 rounded-2xl border border-neutral-200/80 dark:border-neutral-800/60 bg-white/90 dark:bg-neutral-900/50 backdrop-blur-md text-card-foreground shadow-md hover:shadow-xl dark:shadow-none dark:hover:shadow-[0_8px_30px_rgb(0,0,0,0.3)] hover:-translate-y-1 transition-all duration-300 cursor-pointer flex flex-col md:flex-row md:items-center justify-between gap-4"
             onClick={() => setSelectedCafe(cafe)}
           >
             <div className="flex-1">
