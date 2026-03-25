@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 
 export function Hero() {
   return (
-    <section className="pt-6 pb-16 md:pt-6 lg:pt-8 md:pb-16 lg:pb-20 flex flex-col items-start md:items-center justify-center overflow-hidden relative w-full">
+    <section className="pt-2 pb-12 md:pt-2 lg:pt-4 md:pb-12 lg:pb-16 flex flex-col items-start md:items-center justify-center overflow-hidden relative w-full">
       <motion.div
         initial={{ opacity: 0, scale: 0.9, y: 10 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}

@@ -6,6 +6,93 @@ import { MapPin, Clock, Wifi, Coffee, X } from "lucide-react";
 import { Instagram } from "./icons/instagram";
 import Image from "next/image";
 
+function StoreStatusBadge({ jamString }) {
+  const [status, setStatus] = useState(null);
+
+  useEffect(() => {
+    const checkStatus = () => {
+      if (!jamString) return { text: "-", color: "bg-neutral-500 text-white" };
+
+      const lowerJam = jamString.toLowerCase();
+      if (lowerJam.includes('24 jam')) {
+        return { text: 'Buka', color: 'bg-green-500 dark:bg-green-600 text-white' };
+      }
+
+      const times = jamString.split('-');
+      if (times.length !== 2) {
+        return { text: jamString, color: 'bg-green-500/75 text-white' };
+      }
+
+      const [openStr, closeStr] = times.map(t => t.trim());
+      const openParts = openStr.split(':').map(Number);
+      const closeParts = closeStr.split(':').map(Number);
+
+      if (isNaN(openParts[0])) {
+         return { text: jamString, color: 'bg-green-500/75 text-white' };
+      }
+
+      const openHour = openParts[0];
+      const openMin = openParts[1] || 0;
+      const closeHour = closeParts[0];
+      const closeMin = closeParts[1] || 0;
+
+      const now = new Date();
+      // Parse current time in WIB (Asia/Jakarta)
+      const options = { timeZone: 'Asia/Jakarta', hour: 'numeric', minute: 'numeric', hour12: false };
+      const formatter = new Intl.DateTimeFormat('en-US', options);
+      const parts = formatter.formatToParts(now);
+      const currentHour = parseInt(parts.find(p => p.type === 'hour').value, 10);
+      const currentMin = parseInt(parts.find(p => p.type === 'minute').value, 10);
+
+      const currentTotalMins = currentHour * 60 + currentMin;
+      const openTotalMins = openHour * 60 + openMin;
+      let closeTotalMins = closeHour * 60 + closeMin;
+
+      if (closeTotalMins <= openTotalMins) {
+        closeTotalMins += 24 * 60; // closes next day
+      }
+
+      let adjustedCurrentMins = currentTotalMins;
+      if (currentTotalMins < openTotalMins && currentTotalMins <= (closeTotalMins % (24 * 60))) {
+         adjustedCurrentMins += 24 * 60;
+      }
+
+      if (adjustedCurrentMins < openTotalMins || adjustedCurrentMins >= closeTotalMins) {
+        return { text: 'Tutup', color: 'bg-red-500 dark:bg-red-600 text-white' };
+      }
+
+      if (closeTotalMins - adjustedCurrentMins <= 60) {
+        return { text: 'Akan Tutup', color: 'bg-yellow-500 dark:bg-yellow-600 text-white' };
+      }
+
+      return { text: 'Buka', color: 'bg-green-500 dark:bg-green-600 text-white' };
+    };
+
+    setStatus(checkStatus());
+    
+    // Update every minute (60000ms)
+    const interval = setInterval(() => {
+       setStatus(checkStatus());
+    }, 60000);
+
+    return () => clearInterval(interval);
+  }, [jamString]);
+
+  if (!status) {
+    return (
+      <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-neutral-200 dark:bg-neutral-800 text-transparent animate-pulse font-medium whitespace-nowrap text-xs md:text-sm">
+        <Clock className="w-3.5 h-3.5 md:w-4 md:h-4 text-neutral-400" /> -----
+      </span>
+    );
+  }
+
+  return (
+    <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full font-medium whitespace-nowrap text-xs md:text-sm ${status.color} shadow-sm transition-colors`}>
+      <Clock className="w-3.5 h-3.5 md:w-4 md:h-4" /> {status.text}
+    </span>
+  );
+}
+
 export function CafeList({ cafes }) {
   const [selectedCafe, setSelectedCafe] = useState(null);
 
@@ -41,9 +128,7 @@ export function CafeList({ cafes }) {
             </div>
             
             <div className="flex flex-row md:flex-col items-center md:items-end justify-between md:justify-center gap-2 text-sm">
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-green-500/75 font-medium whitespace-nowrap">
-                <Clock className="w-4 h-4" /> {cafe.jam_operasional}
-              </span>
+              <StoreStatusBadge jamString={cafe.jam_operasional} />
               <span className="font-semibold px-3 py-1 border border-border border-dashed rounded-full">{cafe.price}</span>
             </div>
           </motion.div>
