@@ -124,18 +124,9 @@ function Modal({ cafe, onClose }) {
               <h4 className="font-semibold text-xs md:text-sm uppercase tracking-wider text-neutral-500 dark:text-neutral-400 mb-2 flex items-center gap-2">
                 <Wifi className="w-4 h-4" /> Fasilitas WiFi
               </h4>
-              <div className="p-3 bg-background border border-border rounded-xl space-y-2 text-sm">
-                <div className="flex items-center justify-between gap-4">
-                  <span className="text-neutral-500">SSID:</span> 
-                  <span className="font-medium text-right break-words">{cafe.wifi_ssid || '-'}</span>
-                </div>
-                <div className="h-px bg-border w-full" />
-                <div className="flex items-center justify-between gap-4">
-                  <span className="text-neutral-500">Pass:</span> 
-                  <code className="px-2 py-0.5 bg-neutral-100 dark:bg-neutral-800 rounded font-medium select-all">
-                    {cafe.wifi_password || 'Tanya Kasir'}
-                  </code>
-                </div>
+              <div className="p-3 bg-background border border-border rounded-xl flex items-center justify-between gap-4 text-sm">
+                <span className="text-neutral-500">SSID:</span> 
+                <span className="font-medium text-right break-words">{cafe.wifi_ssid || '-'}</span>
               </div>
             </div>
           </div>
