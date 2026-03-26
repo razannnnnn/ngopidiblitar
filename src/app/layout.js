@@ -38,7 +38,7 @@ export const metadata = {
     siteName: 'NgopiDiBlitar',
     images: [
       {
-        url: '/og-image.jpg', // Pastikan nanti membuat gambar og-image.jpg di folder public untuk link sharing WhatsApp/FB/dll
+        url: '/og-image.png', // Pastikan nanti membuat gambar og-image.jpg di folder public untuk link sharing WhatsApp/FB/dll
         width: 1200,
         height: 630,
         alt: 'NgopiDiBlitar Preview Image',
