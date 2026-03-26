@@ -16,10 +16,61 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "NgopiDiBlitar | Rekomendasi Kopian Di Blitar",
-  description: "Daftar cafe terbaik dan hits di Blitar. Temukan tempat nongkrong asik dengan gaya notion.",
+  metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || 'https://ngopidiblitar.vercel.app'), // Ganti URL ini saat sudah punya domain asli (atau biarkan default Vercel)
+  title: {
+    default: "NgopiDiBlitar | Rekomendasi Cafe & Tempat Nongkrong Hits di Blitar",
+    template: "%s | NgopiDiBlitar"
+  },
+  description: "Daftar rekomendasi cafe terbaik, hits, instagramable, dan estetik di Blitar. Temukan tempat nongkrong asik, WiFi cepat, dan kopi enak hanya di NgopiDiBlitar.",
+  keywords: ["cafe blitar", "tempat nongkrong blitar", "kopi blitar", "ngopi di blitar", "cafe aesthetic blitar", "cafe hits blitar", "rekomendasi cafe blitar", "coffee shop blitar", "blitar"],
+  authors: [{ name: 'NgopiDiBlitar' }],
+  creator: 'NgopiDiBlitar',
+  publisher: 'NgopiDiBlitar',
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
+  openGraph: {
+    title: 'NgopiDiBlitar | Rekomendasi Cafe & Tempat Nongkrong Hits di Blitar',
+    description: 'Daftar rekomendasi cafe terbaik, hits, instagramable, dan estetik di Blitar. Temukan tempat nongkrong asik, WiFi cepat, dan kopi enak hanya di NgopiDiBlitar.',
+    url: process.env.NEXT_PUBLIC_APP_URL, 
+    siteName: 'NgopiDiBlitar',
+    images: [
+      {
+        url: '/og-image.jpg', // Pastikan nanti membuat gambar og-image.jpg di folder public untuk link sharing WhatsApp/FB/dll
+        width: 1200,
+        height: 630,
+        alt: 'NgopiDiBlitar Preview Image',
+      },
+    ],
+    locale: 'id_ID',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'NgopiDiBlitar | Rekomendasi Cafe & Tempat Nongkrong Hits di Blitar',
+    description: 'Daftar rekomendasi cafe terbaik, hits, instagramable, dan estetik di Blitar. Temukan tempat nongkrong asik, WiFi cepat, dan kopi enak hanya di NgopiDiBlitar.',
+    images: ['/og-image.jpg'],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
   icons: {
     icon: '/favicon.svg',
+    shortcut: '/favicon.svg',
+    apple: '/favicon.svg',
+  },
+  verification: {
+    google: 'KODE_VERIFIKASI_GOOGLE_SEARCH_CONSOLE', // Ganti dengan kode Tag HTML dari Google Search Console
   },
 };
 
