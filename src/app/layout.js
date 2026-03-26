@@ -16,7 +16,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || 'https://ngopidiblitar.vercel.app'), // Ganti URL ini saat sudah punya domain asli (atau biarkan default Vercel)
+  metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL), // Ganti URL ini saat sudah punya domain asli (atau biarkan default Vercel)
   title: {
     default: "NgopiDiBlitar | Rekomendasi Cafe & Tempat Nongkrong Hits di Blitar",
     template: "%s | NgopiDiBlitar"

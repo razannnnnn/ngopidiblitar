@@ -1,6 +1,6 @@
 export default function sitemap() {
   // Ganti dengan domain asli jika sudah menggunakan custom domain (misal: https://ngopidiblitar.com)
-  const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://ngopidiblitar.vercel.app'; 
+  const baseUrl = process.env.NEXT_PUBLIC_APP_URL; 
   
   return [
     {
